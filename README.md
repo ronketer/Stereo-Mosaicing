@@ -46,17 +46,35 @@ frame_NNNNN.jpg
 
 ---
 
+## Visualizations
+
+**Optical flow** — Shi-Tomasi features (red) tracked across frames via Lucas-Kanade (green arrows)
+
+![Optical flow](docs/assets/vis_subalgo_1_flow.jpg)
+
+**Space-time volume slice (x,t)** — the red line shows the slit trajectory used to synthesize the panorama
+
+![XT slice](docs/assets/vis_xt_slice.png)
+
+**Translation vs. rotation inputs** — varying streak slopes indicate depth/parallax (left, translation); parallel streaks indicate zero parallax (right, rotation fails)
+
+| Left: varying slopes = depth/parallax | Right: parallel streaks = zero parallax |
+|:---:|:---:|
+| ![Good XT slice](docs/assets/xt_slice_good.jpg) | ![Bad XT slice](docs/assets/xt_slice_bad.jpg) |
+
+---
+
 ## Run It
 
 ```bash
 # Install dependencies
-uv pip install -r requirements.txt
+uv sync
 
 # Generate 1 panorama (default)
-python main.py --input ./frames --output ./out
+uv run python main.py --input ./frames --output ./out
 
 # Generate 5 panoramas at different slit positions
-python main.py --input ./frames --output ./out --n-frames 5
+uv run python main.py --input ./frames --output ./out --n-frames 5
 ```
 
 Output files are saved as `panorama_0.jpg`, `panorama_1.jpg`, ... in the output directory.
